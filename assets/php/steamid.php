@@ -167,7 +167,8 @@ class SteamID {
 	public static function Parse( $input, 
 									$format = self::FORMAT_AUTO, 
 									$resolve_vanity = null,
-									$detect_raw = null ) {
+									$detect_raw = null,
+									$doing_auto = false ) {
 									
 		if( $detect_raw === null ) 
 			$detect_raw = self::$default_detect_raw;
@@ -269,13 +270,16 @@ class SteamID {
 		
 		// Auto detect format:
 		
-		$input = trim( $input );
-		$result = self::Parse( $input, self::FORMAT_STEAMID32 );
-		if( $result !== FALSE ) return $result;
-		$result = self::Parse( $input, self::FORMAT_STEAMID64 );
-		if( $result !== FALSE ) return $result;
-		$result = self::Parse( $input, self::FORMAT_STEAMID3 );
-		if( $result !== FALSE ) return $result;
+		if(!$doing_auto)
+		{
+			$input = trim( $input );
+			$result = self::Parse( $input, self::FORMAT_STEAMID32, false, false, true );
+			if( $result !== FALSE ) return $result;
+			$result = self::Parse( $input, self::FORMAT_STEAMID64, false, false, true );
+			if( $result !== FALSE ) return $result;
+			$result = self::Parse( $input, self::FORMAT_STEAMID3, false, false, true );
+			if( $result !== FALSE ) return $result;
+		}
 		
 		if( preg_match( 
 				'/^(?:https?:\/\/)?(?:www.)?steamcommunity.com\/profiles\/([0-9]+)\/*$/',
