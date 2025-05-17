@@ -1,9 +1,12 @@
 <?php
 $results = false;
 $stmt = false;
-if(preg_match('/^\[U:1:([0-9]+)\]$/', $u, $matches))
+$authtemp = SteamID::Parse($u, SteamID::FORMAT_AUTO, false, false);
+
+if($authtemp !== false)
 {
-	$sid = substr($u, 5, -1);
+	$steamid3 = $authtemp->Format(SteamID::FORMAT_STEAMID3);
+	$sid = substr($steamid3, 5, -1);
 	if($races)
 	{
 		$stmt = $connection->prepare('SELECT auth, name, lastlogin, firstlogin, points, playtime, race_win, race_loss FROM '.MYSQL_PREFIX.'users WHERE auth = ?;');
@@ -29,8 +32,7 @@ if(preg_match('/^\[U:1:([0-9]+)\]$/', $u, $matches))
 		while($row = $stmt->fetch())
 		{
 			echo '<script type="text/javascript">document.title = "Player Stats: '.$name.'";</script>';
-			$authtemp = SteamID::Parse($u, SteamID::FORMAT_STEAMID3);
-			$authtemp = SteamID::Parse($u, SteamID::FORMAT_AUTO, true);
+			
 			$steamid64 = $authtemp->Format(SteamID::FORMAT_STEAMID64);
 			$response = SteamID::Curl("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" .  API_KEY . "&steamids=" . $steamid64);
 			$result = json_decode($response);
