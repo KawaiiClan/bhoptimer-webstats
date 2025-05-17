@@ -1,5 +1,4 @@
 <form action="index.php" method="GET">
-	<input type="hidden" name="sv" id="sv" value="<?=$sv?>"/>
 	<?=($rt)?'<input type="hidden" name="rt" id="rt" value="1"/>':''?>
 	<?=($rr)?'<input type="hidden" name="rr" id="rr" value="1"/>':''?>
 	<?=(isset($u))?'<input type="hidden" name="u" id="u" value="'.$u.'"/>':''?>
