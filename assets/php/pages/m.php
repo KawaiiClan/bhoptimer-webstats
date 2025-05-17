@@ -108,10 +108,11 @@ if($rows > 0)
 					<td>
 <?php
 					$steamid = SteamID::Parse($auth, SteamID::FORMAT_S32);
-					echo '<a href="https://steamcommunity.com/profiles/'.$steamid->Format(SteamID::FORMAT_STEAMID64).'/" target="_blank"><img src="assets/img/steam-icon.png"></img></a>';
+					$steamid64 = $steamid->Format(SteamID::FORMAT_STEAMID64);
+					echo '<a href="https://steamcommunity.com/profiles/'.$steamid64.'/" target="_blank"><img src="assets/img/steam-icon.png"></img></a>';
 ?>
 					</td>
-					<td><?='<a href="index.php?sv='.$sv.'&u='.'[U:1:'.$auth.']'.'">'.$name.'</a>'?></td>
+					<td><?='<a href="index.php?sv='.$sv.'&u='.$steamid64.'">'.$name.'</a>'?></td>
 					<?=($t==-1)?'<td>'.$tracks[$track].'</td>':''?>
 					<?=($s==-1)?'<td>'.$styles[$style].'</td>':''?>
 					<td><?=formattoseconds($time)?></td>
