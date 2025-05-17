@@ -31,13 +31,14 @@ if($rows > 0)
 
 <?php
 		}
+		$steamid = SteamID::Parse($auth, SteamID::FORMAT_S32);
+		$steamid64 = $steamid->Format(SteamID::FORMAT_STEAMID64);
 ?>
 				<tr>
 					<td><?='#'.$rank?></td>
-					<td><?='<a href="index.php?sv='.$sv.'&u='.'[U:1:'.$auth.']'.'">'.$name.'</a>'; ?></td>
+					<td><?='<a href="index.php?u='.$steamid64.'">'.$name.'</a>'; ?></td>
 					<td><center>
-						<?php $steamid = SteamID::Parse($auth, SteamID::FORMAT_S32);
-						echo '<a href="https://steamcommunity.com/profiles/'.$steamid->Format(SteamID::FORMAT_STEAMID64).'/" target="_blank"><img src="assets/img/steam-icon.png"></img></a>'; ?>
+						<?='<a href="https://steamcommunity.com/profiles/'.$steamid64.'/" target="_blank"><img src="assets/img/steam-icon.png"></img></a>'?>
 					</center></td>
 					<td><?=$points; ?></td>
 					<td><?=($lastlogin>0)?date('j M Y', $lastlogin):'Unknown'?></td>
