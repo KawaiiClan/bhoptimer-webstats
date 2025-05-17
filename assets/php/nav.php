@@ -39,11 +39,11 @@
 	<br>
 	Find a player:
 	<br>
-	([U:1:XXXXXX] or username)
+	(SteamID or Username)
 	<br><br>
 	<form id="search" method="GET">
 		<input type="hidden" name="sv" id="sv" value="<?php echo $sv;?>" />
-		<input type="text" name="u" aria-label="..." placeholder="SteamID3 or Username" value="<?=(isset($u))?$u:''?>"/>
+		<input type="text" name="u" aria-label="..." placeholder="SteamID or Username" value="<?=(isset($u))?$u:''?>"/>
 			<button type="submit" class="btn btn-primary">Search</button>
 	</form>
 	<br>
