@@ -3,11 +3,7 @@
 	<h1><?=TOPLEFT_TITLE?></h1>
 	<br><br>
 	<hr>
-	<?php $url = ($sv == 'bhop') ? 'index.php?sv=climb' : 'index.php?sv=bhop';?>
-	<?php $url = (isset($u)) ? $url.'&u='.$u : $url;?>
-	<?php $url = ($rr) ? $url.'&rr=1' : $url;?>
-	<?php $url = ($rt) ? $url.'&rt=1' : $url;?>
-	<?php echo ($sv == 'bhop') ? '<a href="'.$url.'">Server - Bhop</a>' : '<a href="'.$url.'">Server - Climb</a>'; ?>
+	<a href="<?=SERVER_IP?>">Join Server</a>
 	<hr>
 	<a href="index.php">Top Players</a>
 	<a href="index.php?rr=1">Recent Records</a>
