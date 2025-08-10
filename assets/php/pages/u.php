@@ -13,7 +13,7 @@ if($authtemp !== false)
 	}
 	else
 	{
-		$stmt = $connection->prepare('SELECT auth, name, lastlogin, firstlogin, points, playtime, FROM '.MYSQL_PREFIX.'users WHERE auth = ?;');
+		$stmt = $connection->prepare('SELECT auth, name, lastlogin, firstlogin, points, playtime FROM '.MYSQL_PREFIX.'users WHERE auth = ?;');
 	}
 	$stmt->bind_param('s', $sid);
 	$stmt->execute();
@@ -266,3 +266,4 @@ if($stmt != false)
 }
 $connection->close();
 ?>
+
