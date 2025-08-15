@@ -2,6 +2,10 @@
 $results = false;
 $stmt = false;
 $stmt = $connection->prepare('SELECT auth, name, lastlogin, points FROM '.MYSQL_PREFIX.'users ORDER BY points DESC LIMIT '.PLAYER_TOP_RANKING_LIMIT.' OFFSET 0;');
+if($styleranks && $s > -1)
+{
+	$stmt = $connection->prepare('SELECT '.MYSQL_PREFIX.'stylepoints.auth, '.MYSQL_PREFIX.'users.name, '.MYSQL_PREFIX.'users.lastlogin, '.MYSQL_PREFIX.'stylepoints.points FROM '.MYSQL_PREFIX.'stylepoints INNER JOIN '.MYSQL_PREFIX.'users ON '.MYSQL_PREFIX.'stylepoints.auth = '.MYSQL_PREFIX.'users.auth WHERE '.MYSQL_PREFIX.'stylepoints.style = '.$s.' ORDER BY points DESC LIMIT '.PLAYER_TOP_RANKING_LIMIT.' OFFSET 0;');
+}
 $stmt->execute();
 $stmt->store_result();
 $results = ($rows = $stmt->num_rows) > 0;
@@ -19,7 +23,26 @@ if($rows > 0)
 			$first = false;
 ?>
 			<p><h1>Top <?php echo PLAYER_TOP_RANKING_LIMIT; ?> Players</h1></p>
-
+<?php
+			if($styleranks)
+			{
+?>
+				<form action="index.php" method="GET" style="display:inline!important;">
+				<input type="hidden" name="sv" id="sv" value="<?=$sv?>"/>
+				<select name="s" id="s" onchange="this.form.submit()">
+<?php
+					foreach($styles as $id=>$style)
+					{
+?>
+						<option value="<?=$id?>"<?php echo($id == $s)?' selected="selected"':''?>><?=$style?></option>
+<?php
+					}
+?>
+					</select>
+				</form>
+<?php
+			}
+?>
 			<table>
 				<thead>
 					<th>Rank</th>
@@ -63,3 +86,4 @@ if($stmt != false)
 }
 $connection->close();
 ?>
+
