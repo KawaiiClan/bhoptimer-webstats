@@ -76,6 +76,9 @@ $styles =
 //if you use the shavit-challenge plugin for races, change this to 1
 $races = 0;
 
+//if your timer version supports style ranks, enable this for "top" page style functionality
+$styleranks = false;
+
 //default track and style displayed on the map page
 define('DEFAULT_TRACK', 0);
 define('DEFAULT_STYLE', 0);
@@ -90,3 +93,4 @@ $filters =
 	4 => "Fastest",
 	5 => "Slowest",
 ];
+
